@@ -67,6 +67,9 @@ public class User {
         for(Exercise exercise: exerciseList){
             user += ", " + exercise.getName();
         }
+        for(Sleep sleep: sleepList){
+            user += ", " + sleep.stringDuration();
+        }
         return user;
     }
 }

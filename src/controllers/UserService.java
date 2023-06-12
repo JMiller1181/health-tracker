@@ -1,6 +1,7 @@
 package controllers;
 import models.Exercise;
 import models.Food;
+import models.Sleep;
 import models.User;
 
 import java.io.BufferedReader;
@@ -40,7 +41,7 @@ public class UserService {
     public void saveFoodData() {
         try {
             // Write the users and their health data to a file(s)
-            FileWriter writer = new FileWriter("fooddata.txt");
+            FileWriter writer = new FileWriter("food-data.txt");
             for (User user : users) {
                 for (Food food : user.getFoodList()) {
                     writer.write(user.getUserName() + "," + food.getName() + "," + food.getCalories() + "," + food.getDate() + "\n");
@@ -55,7 +56,7 @@ public class UserService {
     public void loadFoodData() {
         // Read the users and their health data from a file(s)
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("fooddata.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("food-data.txt"));
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
@@ -77,7 +78,7 @@ public class UserService {
     public void saveExerciseData() {
         try {
             // Write the users and their health data to a file(s)
-            FileWriter writer = new FileWriter("exercisedata.txt");
+            FileWriter writer = new FileWriter("exercise-data.txt");
             for (User user : users) {
                 for (Exercise exercise : user.getExerciseList()) {
                     writer.write(user.getUserName() + "," + exercise.getName() + "," + exercise.getDuration()
@@ -93,7 +94,7 @@ public class UserService {
     public void loadExerciseData() {
         // Read the users and their health data from a file(s)
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("exercisedata.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("exercise-data.txt"));
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
@@ -111,6 +112,45 @@ public class UserService {
             e.printStackTrace();
         }
     }
+
+    public void saveSleepData() {
+        try {
+            // Write the users and their health data to a file(s)
+            FileWriter writer = new FileWriter("sleep-data.txt");
+            for (User user : users) {
+                for (Sleep sleep : user.getSleepList()) {
+                    writer.write(user.getUserName() + "," + sleep.getStartDate() + "," + sleep.getStart()
+                            + "," + sleep.getEndDate() + "," + sleep.getEnd() + "\n");
+                }
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadSleepData() {
+        // Read the users and their health data from a file(s)
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("sleep-data.txt"));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                String username = parts[0];
+                User user = findUser(username);
+                if (user == null) {
+                    user = new User(username);
+                    addUser(user);
+                }
+                Sleep sleep = new Sleep(parts[1], parts[2], parts[3], parts[4]);
+                user.addSleep(sleep);
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public String toString(){
         String userList = "";
