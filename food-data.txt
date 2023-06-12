@@ -1,4 +1,5 @@
 Jacob,Pizza,1000,06/12/23
 Jacob,Chicken,300,06/12/23
+Jacob,Crackers,100,06/12/23
 Steve,Pizza,1000,06/12/23
 Steve,Chicken,300,06/12/23

@@ -51,6 +51,6 @@ public class SleepService {
         int averageMinutes = averageSleep % 60;
         int averageHours = (averageSleep - averageMinutes)/60;
         System.out.println("From " + date1+ " to " + date2 + " you slept a total of " + totalMinutes
-                + " minutes, averaging " + averageHours + " hours and " + averageMinutes + " a night.");
+                + " minutes, averaging " + averageHours + " hours and " + averageMinutes + " minutes a night.");
     }
 }
